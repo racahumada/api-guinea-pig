@@ -1,5 +1,8 @@
 import express from 'express';
 import userRouter from './route/user.js';
+import db from './config/db.js'; //Importando conexão
+
+db(); //Executando conexão com Mongo
 
 //Iniciando express em server
 const server = express();
