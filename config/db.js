@@ -4,10 +4,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const db = async () => {
-  await mongoose.connect(process.env.URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  try {
+    await mongoose.connect(process.env.URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export default db;
