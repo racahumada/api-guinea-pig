@@ -6,9 +6,10 @@ db(); //Executando conexão com Mongo
 
 //Iniciando express em server
 const server = express();
+server.use(express.json()); //middleware para recebimento de json
 
 //Definindo rotas
-server.use('/user', userRouter);
+server.use('/', userRouter);
 
 //Rota Raiz
 server.get('/', (req, res) => {
