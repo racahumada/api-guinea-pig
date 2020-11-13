@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import userRouter from './route/user.js';
 import db from './config/db.js'; //Importando conexão
 
@@ -7,6 +8,8 @@ db(); //Executando conexão com Mongo
 //Iniciando express em server
 const server = express();
 server.use(express.json()); //middleware para recebimento de json
+
+server.use(cors());
 
 //Definindo rotas
 server.use('/', userRouter);
