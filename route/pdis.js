@@ -30,9 +30,16 @@ pdiRouter.post('/new', async (req, res) => {
     const { picture } = req.files;
     const [_, ext] = picture.name.split('.');
 
+    //Ajustando nome e salvando arquivo no servidor
     picture.name = `${name.toLowerCase()}-${id}.${ext}`;
+    picture.mv(pathPdiProfile + picture.name);
 
-    picture.mv('.' + pathPdiProfile + picture.name);
+    const resultPhoto = await PhotoProfileModel.create({
+      name: picture.name,
+      pdiId: id,
+    });
+
+    console.log(resultPhoto);
 
     res.status(200).send({
       message: 'Pdi cadastrado com sucesso',
@@ -42,7 +49,7 @@ pdiRouter.post('/new', async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(400).send('Erro ao salvar novo PDI', error);
+    res.status(400).send(error);
   }
 });
 
